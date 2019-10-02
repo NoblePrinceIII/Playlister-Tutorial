@@ -14,24 +14,12 @@ comments = db.comments
 
 
 app = Flask(__name__)
-#
-# @app.route('/')
-# def index():
-#     """Return homepage."""
-#     return render_template('home.html', msg='Flask is Cool!!')
-#     # OUR MOCK ARRAY OF PROJECTS
-
-# playlists = [
-#     { 'title': 'Cat Videos', 'description': 'Cats acting weird' },
-#     { 'title': '80\'s Music', 'description': 'Don\'t stop believing!' }
-# ]
 
 
 @app.route('/')
 def playlists_index():
     """Show all playlists."""
     return render_template('playlists_index.html', playlists=playlists.find())
-
 
 
 @app.route('/playlists/new')
@@ -110,9 +98,6 @@ def comments_delete(comment_id):
     comment = comments.find_one({'_id': ObjectId(comment_id)})
     comments.delete_one({'_id': ObjectId(comment_id)})
     return redirect(url_for('playlists_show', playlist_id=comment.get('playlist_id')))
-
-
-
 
 
 if __name__ == '__main__':
